@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: '../backend-part2/public',
+    outDir: '../misterToy backend mongodb/public',
     emptyOutDir: true
     }
 })

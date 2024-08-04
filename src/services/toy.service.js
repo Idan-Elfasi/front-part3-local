@@ -35,21 +35,21 @@ export const toyService = {
   getBranchs,
 }
 
-function query(filterBy = {}, sortBy, pageIdx) {
-  return httpService.get(BASE_URL, { filterBy, sortBy, pageIdx })
+async function query(filterBy = {}, sortBy, pageIdx) {
+  console.log('toys where are you?');
+  return await httpService.get(BASE_URL, { filterBy, sortBy, pageIdx })
 }
 
-function getById(toyId) {
-  return httpService.get(BASE_URL + toyId)
+ async function getById(toyId) {
+  return await httpService.get(BASE_URL + toyId)
 }
 
-function remove(toyId) {
-  return httpService.delete(BASE_URL + toyId)
+ async function remove(toyId) {
+  return  await httpService.delete(BASE_URL + toyId)
 }
 
-function save(toy) {
-  const method = toy._id ? 'put' : 'post'
-  return httpService[method](BASE_URL, toy)
+ async function save(toy) {
+   return  toy._id ?  await httpService.put(BASE_URL + toy._id, toy) :  await httpService.post(BASE_URL , toy)
 }
 
 function getDefaultFilter() {
