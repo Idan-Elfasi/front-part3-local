@@ -38,7 +38,7 @@ export function toyReducer(state = initialState, action = {}) {
       return { ...state, toys, lastToys: state.toys }
 
     case ADD_TOY:
-      toys = [action.toy, ...state.toys]
+      toys = [ ...state.toys,action.toy]
       return { ...state, toys, lastToys: state.toys }
 
     case UPDATE_TOY:
