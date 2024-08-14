@@ -6,6 +6,7 @@ const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
 import { userService } from "./user.service.js"
 import { httpService } from "./http.service.js"
+import { showErrorMsg, showUserMsg } from "./event-bus.service.js"
 
 export const authService = {
     loginAuth,
@@ -18,6 +19,7 @@ async function loginAuth({ username, password }) {
    if(user){
     return userService.saveLocalUser(user)
    }
+   else return null
 }
 async function signUpAuth({ username, password, fullname }) {
     const user = await httpService.post(BASE_URL + SIGN_UP, { username, password, fullname })

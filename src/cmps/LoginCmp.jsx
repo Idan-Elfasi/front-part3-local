@@ -36,11 +36,13 @@ export function LoginCmp({ onSetLoggdeinUser }) {
     async function login() {
         try {
             const loggedinUser = await authService.loginAuth(credentials)
-            await onSetLoggdeinUser(loggedinUser)
-            showSuccessMsg('Logged in successfully')
+            if (loggedinUser) {
+                  await onSetLoggdeinUser(loggedinUser)
+                showSuccessMsg('Logged in successfully')
+            }
         }
         catch (err) {
-            showErrorMsg('Oops try again ')
+            showErrorMsg(' incorrect login data  ')
             throw err
         }
     }

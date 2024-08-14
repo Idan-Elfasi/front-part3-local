@@ -13,12 +13,16 @@ export function ToyPreview({ toy }) {
         <h1 className="toy-name">{toy.name}</h1>
         {isImgLoading && <div className="skeleton-loader"></div>}
         <div className="img-container">
+          {/* <label > */}
           <img
             src={`https://robohash.org/${toy.name}?set=set4`}
             alt={toy.name}
             onLoad={handleImageLoad}
             style={{ display: isImgLoading ? 'none' : 'block' }}
           />
+          {/* <input type="file" hidden onChange={onHandleFile(ev)} /> */}
+
+          {/* </label> */}
         </div>
         <h1>Price: ${toy.price}</h1>
         <h1 className={toy.inStock ? 'green' : 'red'}>

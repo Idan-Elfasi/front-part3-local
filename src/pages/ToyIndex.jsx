@@ -8,12 +8,15 @@ import { ToyFilter } from '../cmps/ToyFilter'
 import { ToyList } from '../cmps/ToyList'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { loadToys, removeToyOptimistic, setFilter, setSort } from '../store/actions/toy.actions'
+import { userService } from '../services/user.service'
 
 export function ToyIndex() {
   const toys = useSelector(storeState => storeState.toyModule.toys)
   const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
   const sortBy = useSelector(storeState => storeState.toyModule.sortBy)
   const isLoading = useSelector(storeState => storeState.toyModule.flag.isLoading)
+  const loggedinUser = useSelector(storeState => storeState.userModule.loggedinUser)
+
 
   const [pageIdx, setPageIdx] = useState(0)
 
@@ -31,6 +34,7 @@ export function ToyIndex() {
         loadToys(pageIdx)
         showSuccessMsg('Toy removed')
       })
+
       .catch(err => {
         console.log('Cannot remove toy', err)
         showErrorMsg('Cannot remove toy')
@@ -44,6 +48,7 @@ export function ToyIndex() {
   function onSetSort(sortBy) {
     setSort(sortBy)
   }
+  // if(!loggedinUser) const user=userService.getEmptyUser()
 
   return (
     <section className="toy-index">
@@ -53,13 +58,14 @@ export function ToyIndex() {
         sortBy={sortBy}
         onSetSort={onSetSort}
       />
-      <div style={{ marginBlockStart: '0.5em', textAlign: 'center' }}>
+      {!loggedinUser ? <button >no user login</button> : !loggedinUser.isAdmin ? <button>the user not admin</button> 
+      : <div style={{ marginBlockStart: '0.5em', textAlign: 'center' }}>
         <button style={{ marginInline: 0 }}>
           <Link to="/toy/edit">Add Toy</Link>
         </button>
-      </div>
+      </div>}
       {isLoading && <Loader />}
-      {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
+      {!isLoading && <ToyList toys={toys} loggedinUser={loggedinUser || null} onRemoveToy={onRemoveToy} />}
       <PaginationButtons
         pageIdx={pageIdx}
         setPageIdx={setPageIdx}
