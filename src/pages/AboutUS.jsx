@@ -10,7 +10,7 @@ export function AboutUs() {
         numquam labore quae. Accusamus libero perferendis ducimus? Alias unde
         hic quisquam doloremque.
       </p>
-      <GoogleMap/>
+      {/* <GoogleMap/> */}
      </section>
   )
 }

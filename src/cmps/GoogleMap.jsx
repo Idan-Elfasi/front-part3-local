@@ -20,8 +20,7 @@ export function GoogleMap() {
      const branchesMap=toyService.getBranchs()
 const places=Object.keys(branchesMap)
 const branchsCoords=Object.values(branchesMap)
-// console.log(branches);
-//     const  [branch,setBranch]=useState(branches[0])
+
 
     const [coords, setCoords] = useState({ lat: 32.0853, lng: 34.7818 })
     const zoom = 11
@@ -50,10 +49,7 @@ const branchsCoords=Object.values(branchesMap)
 
                    })
 
-                //    <AnyReactComponent
-                //    {...coorsBranch}
-                //      text="🚩"
-                //  />
+               
 
                 }
             </GoogleMapReact   >
