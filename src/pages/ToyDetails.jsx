@@ -8,25 +8,30 @@ export function ToyDetails() {
     const [toy, setToy] = useState(null)
     const { toyId } = useParams()
     const navigate = useNavigate()
+    const [isImgLoading, setImgLoading] = useState(true)
 
+    
     useEffect(() => {
         loadToy()
     }, [toyId])
-
+    
     function loadToy() {
         toyService.getById(toyId)
-            .then(toy => setToy(toy))
-            .catch(err => {
-                console.log('Had issues in toy details', err)
-                showErrorMsg('Cannot load toy')
-                navigate('/toy')
-            })
+        .then(toy => setToy(toy))
+        .catch(err => {
+            console.log('Had issues in toy details', err)
+            showErrorMsg('Cannot load toy')
+            navigate('/toy')
+        })
     }
-
+    function handleImageLoad() {
+      setImgLoading(false)
+    }
+    
     if (!toy) return <Loader />
-
+    
     return (
-        <section className="toy-details" style={{ textAlign: 'center' }}>
+        <section className="toy-details" >
             <h1>
                 Toy name: <span>{toy.name}</span>
             </h1>
@@ -39,6 +44,12 @@ export function ToyDetails() {
             <h1 className={toy.inStock ? 'green' : 'red'}>
                 {toy.inStock ? 'In stock' : 'Not in stock'}
             </h1>
+            <img
+            src={`https://robohash.org/${toy.name}?set=set4`}
+            alt={toy.name}
+            onLoad={handleImageLoad}
+            style={{ display: isImgLoading ? 'none' : 'block' }}
+          />
             <button>
                 <Link to="/toy">Back</Link>
             </button>

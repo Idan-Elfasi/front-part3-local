@@ -1,0 +1,16 @@
+.toy-details{
+    display: flex;              /* Enables Flexbox */
+    flex-direction: column;     /* Stacks items vertically */
+    align-items: center;        /* Centers items horizontally */
+    justify-content: center;    /* Centers items vertically */
+    height: 60vh;              /* Makes the container full height of the viewport */
+    text-align: center;         /* Centers text within h1 */
+    justify-items: center;
+}
+.toy-details img{
+    max-width: 100%;
+    height: auto;
+}
+.toy-details button {
+    margin-top: 2.5em;
+}
