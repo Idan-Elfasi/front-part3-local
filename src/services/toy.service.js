@@ -35,7 +35,7 @@ export const toyService = {
   getBranchs,
 }
 
-async function query(filterBy = {}, sortBy, pageIdx) {
+async function query(filterBy = {}, sortBy={}, pageIdx) {
   console.log('toys where are you?');
   return await httpService.get(BASE_URL, { filterBy, sortBy, pageIdx })
 }
